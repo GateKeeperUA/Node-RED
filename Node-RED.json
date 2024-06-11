@@ -1,0 +1,2112 @@
+[
+    {
+        "id": "b5f15a81334d56a5",
+        "type": "tab",
+        "label": "BackOffice",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cec6075d1d38d39e",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "3555278a94795547",
+                "3e5962af6ea8dae8"
+            ]
+        ]
+    },
+    {
+        "id": "2cd0397f12cfbbb7",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "QUERY",
+        "func": "var accesslevel;\nvar sala;\n\nif (msg.payload.sala!=\"\"){\n    sala = msg.payload.sala;\n    accesslevel = msg.payload.level;\n    \n    msg.topic= \"UPDATE IP SET Permission = '\";\n    msg.topic += accesslevel;\n    msg.topic += \"' WHERE Room = '\";\n    msg.topic += sala;\n    msg.topic += \"';\";\n  \n\n    msg.payload =\"Sucesso\";\n}\nelse \n    msg.topic =\"\";\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 520,
+        "wires": [
+            [
+                "2a8091908e35928b"
+            ]
+        ]
+    },
+    {
+        "id": "f0682520bbf55903",
+        "type": "switch",
+        "z": "b5f15a81334d56a5",
+        "name": "Ups",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 520,
+        "wires": [
+            [
+                "853fbb66e6ddf4d3"
+            ],
+            [
+                "231776250783c54e"
+            ]
+        ]
+    },
+    {
+        "id": "853fbb66e6ddf4d3",
+        "type": "change",
+        "z": "b5f15a81334d56a5",
+        "name": "DONE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DONE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 500,
+        "wires": [
+            [
+                "949436b7178e23e2"
+            ]
+        ]
+    },
+    {
+        "id": "231776250783c54e",
+        "type": "change",
+        "z": "b5f15a81334d56a5",
+        "name": "ERRO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ERRO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 540,
+        "wires": [
+            [
+                "71bc348218286910"
+            ]
+        ]
+    },
+    {
+        "id": "84638aa798ad20c7",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "QUERY",
+        "func": "var accesslevel;\nvar user;\n\nif (msg.payload.sala!=\"\"){\n    user = msg.payload.user;\n    accesslevel = msg.payload.level;\n    \n    msg.topic= \"UPDATE ID SET Permission = '\";\n    msg.topic += accesslevel;\n    msg.topic += \"' WHERE ID = '\";\n    msg.topic += user;\n    msg.topic += \"';\";\n  \n\n    msg.payload =\"Sucesso\";\n}\nelse \n    msg.topic =\"\";\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 920,
+        "wires": [
+            [
+                "1ed0bac6c2306aa6"
+            ]
+        ]
+    },
+    {
+        "id": "61244a05eb890b5a",
+        "type": "switch",
+        "z": "b5f15a81334d56a5",
+        "name": "Ups",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 920,
+        "wires": [
+            [
+                "50ea4ef0092af4d7"
+            ],
+            [
+                "b4deb770ec90fd10"
+            ]
+        ]
+    },
+    {
+        "id": "50ea4ef0092af4d7",
+        "type": "change",
+        "z": "b5f15a81334d56a5",
+        "name": "DONE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Atualizado com sucesso",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 880,
+        "wires": [
+            [
+                "1a81933b025e8b2c"
+            ]
+        ]
+    },
+    {
+        "id": "b4deb770ec90fd10",
+        "type": "change",
+        "z": "b5f15a81334d56a5",
+        "name": "ERRO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Utilizador não está na Base de Dados",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 960,
+        "wires": [
+            [
+                "45f5336ed8bd1677"
+            ]
+        ]
+    },
+    {
+        "id": "56f16b4df13812c2",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "QUERY",
+        "func": "var sala;\nvar id;\n\nif (msg.payload.id!=\"\"){\n    sala = msg.payload.nsala;\n    id = msg.payload.id;\n    \n    msg.topic= \"UPDATE IP SET Room = '\";\n    msg.topic += sala;\n    msg.topic += \"' WHERE Serial = '\";\n    msg.topic += id;\n    msg.topic += \"';\";\n  \n\n    msg.payload =\"Sucesso\";\n}\nelse \n    msg.topic =\"\";\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 680,
+        "wires": [
+            [
+                "f81b776ad420b894"
+            ]
+        ]
+    },
+    {
+        "id": "c88ecb97a003ef27",
+        "type": "switch",
+        "z": "b5f15a81334d56a5",
+        "name": "Ups",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 680,
+        "wires": [
+            [
+                "ea76ef809da97d88"
+            ],
+            [
+                "c39cda2971741b27"
+            ]
+        ]
+    },
+    {
+        "id": "c39cda2971741b27",
+        "type": "change",
+        "z": "b5f15a81334d56a5",
+        "name": "ERRO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ERRO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 700,
+        "wires": [
+            [
+                "56c462ddfd37272f"
+            ]
+        ]
+    },
+    {
+        "id": "ea76ef809da97d88",
+        "type": "change",
+        "z": "b5f15a81334d56a5",
+        "name": "DONE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DONE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 660,
+        "wires": [
+            [
+                "349f55b7d69c237c"
+            ]
+        ]
+    },
+    {
+        "id": "a8bc9cd3e7320f39",
+        "type": "mqtt out",
+        "z": "b5f15a81334d56a5",
+        "name": "EMERGENCY",
+        "topic": "DETI/Emergency",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0dd50754bbb5709a",
+        "x": 700,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "f53b68478a50e780",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "MSG",
+        "func": "msg.payload = \"Emergency\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 420,
+        "wires": [
+            [
+                "a8bc9cd3e7320f39"
+            ]
+        ]
+    },
+    {
+        "id": "964e0570dabef02e",
+        "type": "ui_button",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "6be37b9c7940b181",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "EMERGÊNCIA",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "Esta ação irá evacuar todas as salas. Deseja continuar?",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 420,
+        "wires": [
+            [
+                "fb1ea5d8804aca0e"
+            ]
+        ]
+    },
+    {
+        "id": "21d69544cbc7d582",
+        "type": "ui_form",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "label": "Alterar Permissão da sala",
+        "group": "d631b1de96be08a6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Sala",
+                "value": "sala",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Nivel de Acesso",
+                "value": "level",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "sala": "",
+            "level": ""
+        },
+        "payload": "",
+        "submit": "Submeter",
+        "cancel": "Cancelar",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "2cd0397f12cfbbb7"
+            ]
+        ]
+    },
+    {
+        "id": "3bdaa0f7ad2da758",
+        "type": "ui_form",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "label": "Alterar a Premissão do Utilizador",
+        "group": "7413bc0a58eefed3",
+        "order": 1,
+        "width": 7,
+        "height": 3,
+        "options": [
+            {
+                "label": "Utilizador",
+                "value": "user",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Nivel de Acesso",
+                "value": "level",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "user": "",
+            "level": ""
+        },
+        "payload": "",
+        "submit": "Submeter",
+        "cancel": "Cancelar",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 140,
+        "y": 860,
+        "wires": [
+            [
+                "84638aa798ad20c7"
+            ]
+        ]
+    },
+    {
+        "id": "31eafe20ef6ac55a",
+        "type": "ui_form",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "label": "Alterar Numero de Sala",
+        "group": "d631b1de96be08a6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Identificador do Sistema",
+                "value": "id",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Numero de Sala",
+                "value": "nsala",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "id": "",
+            "nsala": ""
+        },
+        "payload": "",
+        "submit": "Submeter",
+        "cancel": "Cancelar",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 130,
+        "y": 680,
+        "wires": [
+            [
+                "56f16b4df13812c2"
+            ]
+        ]
+    },
+    {
+        "id": "949436b7178e23e2",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "msg.payload",
+        "topic": "Atualizado",
+        "name": "OK",
+        "x": 930,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "71bc348218286910",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "msg.payload",
+        "topic": "ERRO",
+        "name": "ERRO",
+        "x": 930,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "1a81933b025e8b2c",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "msg.payload",
+        "topic": "Atualizado",
+        "name": "OK",
+        "x": 930,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "45f5336ed8bd1677",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "msg.payload",
+        "topic": "ERRO",
+        "name": "ERRO",
+        "x": 930,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "56c462ddfd37272f",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "msg.payload",
+        "topic": "ERRO",
+        "name": "ERRO",
+        "x": 930,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "349f55b7d69c237c",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "msg.payload",
+        "topic": "Atualizado",
+        "name": "OK",
+        "x": 930,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "3555278a94795547",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "66599c4a7f0d48bb",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM IP;",
+        "name": "IP",
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "9c4b444497adebae"
+            ]
+        ]
+    },
+    {
+        "id": "2a8091908e35928b",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "66599c4a7f0d48bb",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM IP;",
+        "name": "IP",
+        "x": 510,
+        "y": 520,
+        "wires": [
+            [
+                "f0682520bbf55903"
+            ]
+        ]
+    },
+    {
+        "id": "3e5962af6ea8dae8",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "ad3cccc68a51eddb",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM ID;",
+        "name": "ID",
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "cad23ced06362bad"
+            ]
+        ]
+    },
+    {
+        "id": "1ed0bac6c2306aa6",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "66599c4a7f0d48bb",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM IP;",
+        "name": "ID",
+        "x": 490,
+        "y": 920,
+        "wires": [
+            [
+                "61244a05eb890b5a"
+            ]
+        ]
+    },
+    {
+        "id": "f81b776ad420b894",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "66599c4a7f0d48bb",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM IP;",
+        "name": "IP",
+        "x": 510,
+        "y": 680,
+        "wires": [
+            [
+                "c88ecb97a003ef27"
+            ]
+        ]
+    },
+    {
+        "id": "9c4b444497adebae",
+        "type": "ui_table",
+        "z": "b5f15a81334d56a5",
+        "group": "6be37b9c7940b181",
+        "name": "Salas",
+        "order": 1,
+        "width": 11,
+        "height": 6,
+        "columns": [
+            {
+                "field": "Room",
+                "title": "Sala",
+                "width": "100",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Ocupation",
+                "title": "Pessoas",
+                "width": "100",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Permission",
+                "title": "Nivel de Acesso",
+                "width": "150",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Serial",
+                "title": "Identificador do Sistema",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 470,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cad23ced06362bad",
+        "type": "ui_table",
+        "z": "b5f15a81334d56a5",
+        "group": "bf733cdbdd674558",
+        "name": "IDs",
+        "order": 1,
+        "width": 10,
+        "height": 6,
+        "columns": [
+            {
+                "field": "UID",
+                "title": "Numero de Cartão",
+                "width": "160",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "NMEC",
+                "title": "Utilizador",
+                "width": "170",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Permission",
+                "title": "Nivel de Autorização",
+                "width": "",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 470,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "fb1ea5d8804aca0e",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "Sim",
+        "cancel": "Cancel",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "EMERGENCIA",
+        "x": 340,
+        "y": 420,
+        "wires": [
+            [
+                "f53b68478a50e780"
+            ]
+        ]
+    },
+    {
+        "id": "38789d226053b75a",
+        "type": "ui_dropdown",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Nº da Sala",
+        "group": "1a2b57f3d6fad734",
+        "order": 2,
+        "width": 7,
+        "height": 6,
+        "passthru": false,
+        "multiple": false,
+        "options": [],
+        "payload": "",
+        "topic": "payload",
+        "topicType": "msg",
+        "className": "",
+        "x": 700,
+        "y": 1280,
+        "wires": [
+            [
+                "264afb2789304d4a"
+            ]
+        ]
+    },
+    {
+        "id": "3aa7bc90e7b4b782",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "dd8f300aa5cc04d1",
+        "sqlquery": "fixed",
+        "sql": "SELECT Room FROM Data",
+        "name": "IP List Room",
+        "x": 290,
+        "y": 1280,
+        "wires": [
+            [
+                "a76d38f2622e60bf"
+            ]
+        ]
+    },
+    {
+        "id": "58f4098e138248b1",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1280,
+        "wires": [
+            [
+                "3aa7bc90e7b4b782"
+            ]
+        ]
+    },
+    {
+        "id": "a76d38f2622e60bf",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "Available Rooms",
+        "func": "var mem;\nvar newmsg = msg;\nnewmsg.options=[];\nvar i = 0;\n\n\nwhile(msg.payload[i] != undefined){\n    mem=msg.payload[i].Room;\n    newmsg.options[i]={};\n    newmsg.options[i][mem] = mem;\n    i++;\n}\n\nmsg=newmsg;\n\nreturn newmsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nvar temp = 0;\nvar hum = 0;\nvar press = 0;\nvar ocupa = 0;\nvar airqual = 0;\n\n\nflow.set(\"temp\", temp);\nflow.set(\"hum\", hum);\nflow.set(\"press\", press);\nflow.set(\"ocupa\", ocupa);\nflow.set(\"airqual\", airqual);",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1280,
+        "wires": [
+            [
+                "38789d226053b75a"
+            ]
+        ]
+    },
+    {
+        "id": "f7c5dddf6a4fe93a",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "QUERY",
+        "func": "var room= flow.get(\"room1\");\nmsg.payload = room;\n\n\nif(msg.payload != undefined){\n    msg.topic = \"SELECT * FROM Data WHERE Room = '\";\n    msg.topic += room;\n    msg.topic += \"';\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 1360,
+        "wires": [
+            [
+                "11f77816de6a1749"
+            ]
+        ]
+    },
+    {
+        "id": "11f77816de6a1749",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "dd8f300aa5cc04d1",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "GET ENV Var",
+        "x": 380,
+        "y": 1360,
+        "wires": [
+            [
+                "5bd4a993f39ad71c"
+            ]
+        ]
+    },
+    {
+        "id": "e87ef4d684435ec2",
+        "type": "ui_gauge",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "e1969f0e3ec10f3a",
+        "order": 1,
+        "width": 8,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#3de8ff",
+            "#0fe600",
+            "#ff943d"
+        ],
+        "seg1": "16",
+        "seg2": "27",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "7d702c7ce33cd32c",
+        "type": "ui_gauge",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "e1969f0e3ec10f3a",
+        "order": 2,
+        "width": 8,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Humidade",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffc23d",
+            "#00d103",
+            "#33e7ff"
+        ],
+        "seg1": "30",
+        "seg2": "80",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "c31cea1529a0375a",
+        "type": "ui_gauge",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "f365520f587b4129",
+        "order": 3,
+        "width": 8,
+        "height": 6,
+        "gtype": "donut",
+        "title": "Pressão Atmosférica",
+        "label": "hPa",
+        "format": "{{value}}",
+        "min": "990",
+        "max": "1080",
+        "colors": [
+            "#b30000",
+            "#00d10e",
+            "#fcff61"
+        ],
+        "seg1": "1000",
+        "seg2": "1030",
+        "diff": false,
+        "className": "",
+        "x": 540,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "42d5ba23ae45c78c",
+        "type": "ui_text",
+        "z": "b5f15a81334d56a5",
+        "group": "f365520f587b4129",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Ocupação:",
+        "format": "{{msg.payload}} pessoas",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 510,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "5bd4a993f39ad71c",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "VAR INJECT",
+        "func": "var temp=0;\nvar hum=0;\nvar press=0;\nvar ocupa=0;\nvar airqual=0;\n\nif(msg.payload != undefined ){\n    temp = (msg.payload[0].Temperature)/100;\n    hum = msg.payload[0].Humidity/1000;\n    press = msg.payload[0].Pressure/100;\n    airqual = msg.payload[0].Gas;\n    ocupa = msg.payload[0].Occupation;\n}\nelse{\n    temp = 0;\n    hum = 0;\n    press = 0;\n    airqual = 0;\n    ocupa = 0;\n}\n\n\n\nflow.set(\"temp\", temp);\nflow.set(\"hum\", hum);\nflow.set(\"press\", press);\nflow.set(\"ocupa\", ocupa);\nflow.set(\"airqual\", airqual);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a767267829a1960d",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "temp",
+        "payloadType": "flow",
+        "x": 170,
+        "y": 1480,
+        "wires": [
+            [
+                "e87ef4d684435ec2"
+            ]
+        ]
+    },
+    {
+        "id": "24622a36c65f1fe0",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hum",
+        "payloadType": "flow",
+        "x": 160,
+        "y": 1520,
+        "wires": [
+            [
+                "7d702c7ce33cd32c"
+            ]
+        ]
+    },
+    {
+        "id": "6831e801e3db6d00",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "press",
+        "payloadType": "flow",
+        "x": 170,
+        "y": 1560,
+        "wires": [
+            [
+                "c31cea1529a0375a"
+            ]
+        ]
+    },
+    {
+        "id": "e2b7404b9d98a392",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "ocupa",
+        "payloadType": "flow",
+        "x": 170,
+        "y": 1600,
+        "wires": [
+            [
+                "42d5ba23ae45c78c"
+            ]
+        ]
+    },
+    {
+        "id": "ccbc4104d24bfec4",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "airqual",
+        "payloadType": "flow",
+        "x": 170,
+        "y": 1640,
+        "wires": [
+            [
+                "f5a5217ec5067917"
+            ]
+        ]
+    },
+    {
+        "id": "9b847631592c5c3c",
+        "type": "ui_text",
+        "z": "b5f15a81334d56a5",
+        "group": "f365520f587b4129",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Qualidade do Ar:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 530,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "f5a5217ec5067917",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "NUM to QUAL",
+        "func": "if(msg.paylad == 1){\n    msg.payload = \"Tóxico\";\n}\nelse if(msg.payload == 2){\n    msg.payload = \"Perigoso\";\n}\nelse if(msg.payload == 3){\n    msg.payload = \"Pouco Saudável\";\n}\nelse if(msg.payload == 4){\n    msg.payload = \"Moderada\";\n}\nelse if(msg.payload == 5){\n    msg.payload = \"Boa\";\n}\nelse\n    msg.payload = undefined;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1640,
+        "wires": [
+            [
+                "9b847631592c5c3c"
+            ]
+        ]
+    },
+    {
+        "id": "f239871b940ca2bb",
+        "type": "ui_text",
+        "z": "b5f15a81334d56a5",
+        "group": "1a2b57f3d6fad734",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "Selecine a Sala que pretende Informação",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 350,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "8b24cb8d4b6ece05",
+        "type": "ui_dropdown",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Nº da Sala",
+        "group": "293a8c16b9cb5d28",
+        "order": 2,
+        "width": 7,
+        "height": 4,
+        "passthru": false,
+        "multiple": false,
+        "options": [],
+        "payload": "",
+        "topic": "payload",
+        "topicType": "msg",
+        "className": "",
+        "x": 740,
+        "y": 1840,
+        "wires": [
+            [
+                "0f5f982991830cb5"
+            ]
+        ]
+    },
+    {
+        "id": "ba3c542e36f8c864",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "66599c4a7f0d48bb",
+        "sqlquery": "fixed",
+        "sql": "SELECT Room FROM IP",
+        "name": "IP List Room",
+        "x": 310,
+        "y": 1840,
+        "wires": [
+            [
+                "519bb09ad7142459"
+            ]
+        ]
+    },
+    {
+        "id": "8ac5c0ac7283b733",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 1840,
+        "wires": [
+            [
+                "ba3c542e36f8c864",
+                "c7eb0bf9e2d8e397"
+            ]
+        ]
+    },
+    {
+        "id": "519bb09ad7142459",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "Available Rooms",
+        "func": "var mem;\nvar newmsg = msg;\nnewmsg.options=[];\nvar i = 0;\n\n\nwhile(msg.payload[i] != undefined){\n    mem=msg.payload[i].Room;\n    newmsg.options[i]={};\n    newmsg.options[i][mem] = mem;\n    i++;\n}\n\nmsg=newmsg;\n\nreturn newmsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nvar temp = 0;\nvar hum = 0;\nvar press = 0;\nvar ocupa = 0;\nvar airqual = 0;\n\n\nflow.set(\"temp\", temp);\nflow.set(\"hum\", hum);\nflow.set(\"press\", press);\nflow.set(\"ocupa\", ocupa);\nflow.set(\"airqual\", airqual);",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1840,
+        "wires": [
+            [
+                "8b24cb8d4b6ece05"
+            ]
+        ]
+    },
+    {
+        "id": "fc604052c4f03a99",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "QUERY",
+        "func": "var room= flow.get(\"room\");\nmsg.payload = room;\n\n\nif(msg.payload != undefined){\n    msg.topic = \"SELECT * FROM LOG WHERE Room = '\";\n    msg.topic += room;\n    msg.topic += \"';\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 1920,
+        "wires": [
+            [
+                "fa6b642eeb32fceb",
+                "68b829813d97ad23"
+            ]
+        ]
+    },
+    {
+        "id": "fa6b642eeb32fceb",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "d4411bb0b7663236",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "GET ENV Var",
+        "x": 320,
+        "y": 1920,
+        "wires": [
+            [
+                "c7eb0bf9e2d8e397"
+            ]
+        ]
+    },
+    {
+        "id": "c7eb0bf9e2d8e397",
+        "type": "ui_table",
+        "z": "b5f15a81334d56a5",
+        "group": "5c07defa63ebae61",
+        "name": "",
+        "order": 1,
+        "width": 10,
+        "height": 8,
+        "columns": [
+            {
+                "field": "Room",
+                "title": "Sala",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "NMEC",
+                "title": "Nº Mecanográfico",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Date",
+                "title": "Hora de Acesso",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 510,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "52b6c6bc380564c4",
+        "type": "ui_text",
+        "z": "b5f15a81334d56a5",
+        "group": "293a8c16b9cb5d28",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "Selecione a Sala que pretende Informação",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 530,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "8f342eb1dafc7f0a",
+        "type": "ui_button",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "293a8c16b9cb5d28",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 2000,
+        "wires": [
+            [
+                "fc604052c4f03a99"
+            ]
+        ]
+    },
+    {
+        "id": "0f5f982991830cb5",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "SET FLOW VAR",
+        "func": "flow.set(\"room\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 1840,
+        "wires": [
+            [
+                "fc604052c4f03a99"
+            ]
+        ]
+    },
+    {
+        "id": "83edab74aede45fb",
+        "type": "ui_button",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "1a2b57f3d6fad734",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 1420,
+        "wires": [
+            [
+                "f7c5dddf6a4fe93a"
+            ]
+        ]
+    },
+    {
+        "id": "264afb2789304d4a",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "SET FLOW VAR",
+        "func": "flow.set(\"room1\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 1280,
+        "wires": [
+            [
+                "f7c5dddf6a4fe93a"
+            ]
+        ]
+    },
+    {
+        "id": "ae65dcb870615762",
+        "type": "ui_text",
+        "z": "b5f15a81334d56a5",
+        "group": "293a8c16b9cb5d28",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Ocupação:",
+        "format": "{{msg.payload}} pessoas",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "68b829813d97ad23",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "Query Para Ocupação",
+        "func": "var room = flow.get(\"room\");\nmsg.payload = room;\n\n\nif (msg.payload != undefined) {\n    msg.topic = \"SELECT Ocupation FROM IP WHERE Room = '\";\n    msg.topic += room;\n    msg.topic += \"';\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 2040,
+        "wires": [
+            [
+                "3b7ccdeb3feb2864"
+            ]
+        ]
+    },
+    {
+        "id": "3b7ccdeb3feb2864",
+        "type": "sqlite",
+        "z": "b5f15a81334d56a5",
+        "mydb": "66599c4a7f0d48bb",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "Ocupação",
+        "x": 550,
+        "y": 2040,
+        "wires": [
+            [
+                "f261ee1bf940c2f4"
+            ]
+        ]
+    },
+    {
+        "id": "f261ee1bf940c2f4",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "INject Ocupa2",
+        "func": "var pessoa = 0;\npessoa = msg.payload[0].Ocupation;\n\n\nif(pessoa == undefined){\n    msg.payload = 0;\n}\nelse \n    msg.payload = pessoa;\n\n    \nflow.set(\"ocupa2\", msg.payload);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "f89958505ea0e431",
+        "type": "function",
+        "z": "b5f15a81334d56a5",
+        "name": "Init",
+        "func": "flow.set(\"room\", 0);\nflow.set(\"room1\", 0);\nflow.set(\"temp\", 0);\nflow.set(\"hum\", 0);\nflow.set(\"press\", 0);\nflow.set(\"ocupa\", 0);\nflow.set(\"ocupa2\", 0);\nflow.set(\"airqual\", 0);\n\n",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "6678148ff43f974b",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.01",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 790,
+        "y": 1680,
+        "wires": [
+            [
+                "f89958505ea0e431"
+            ]
+        ]
+    },
+    {
+        "id": "5562a4a04144620d",
+        "type": "inject",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "ocupa2",
+        "payloadType": "flow",
+        "x": 430,
+        "y": 2120,
+        "wires": [
+            [
+                "ae65dcb870615762"
+            ]
+        ]
+    },
+    {
+        "id": "54316a2596ccdfeb",
+        "type": "ui_button",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "6d9783fe6db4ce8f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reiniciar Sistema",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "power_settings_new",
+        "payload": "O Sistema vai ser Reiniciado. Deseja continuar?",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 2260,
+        "wires": [
+            [
+                "d00edce9936b36e9"
+            ]
+        ]
+    },
+    {
+        "id": "21626775b97051b7",
+        "type": "exec",
+        "z": "b5f15a81334d56a5",
+        "command": "sudo reboot now",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 530,
+        "y": 2260,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "a1174b4330221ac3",
+        "type": "exec",
+        "z": "b5f15a81334d56a5",
+        "command": "node-red-restart",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 520,
+        "y": 2340,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d00edce9936b36e9",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "Sim",
+        "cancel": "Não",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 330,
+        "y": 2260,
+        "wires": [
+            [
+                "21626775b97051b7"
+            ]
+        ]
+    },
+    {
+        "id": "0f8e89d0f901269a",
+        "type": "ui_button",
+        "z": "b5f15a81334d56a5",
+        "name": "",
+        "group": "6d9783fe6db4ce8f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reiniciar Programa",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "loop",
+        "payload": "Esta Ação irá reiniciar o programa. Desja Continuar?",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 2340,
+        "wires": [
+            [
+                "86e86bc44fd79836"
+            ]
+        ]
+    },
+    {
+        "id": "86e86bc44fd79836",
+        "type": "ui_toast",
+        "z": "b5f15a81334d56a5",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "Sim",
+        "cancel": "Não",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 310,
+        "y": 2340,
+        "wires": [
+            [
+                "a1174b4330221ac3"
+            ]
+        ]
+    },
+    {
+        "id": "5e910ae1e181f7ea",
+        "type": "ui_spacer",
+        "z": "b5f15a81334d56a5",
+        "name": "spacer",
+        "group": "293a8c16b9cb5d28",
+        "order": 4,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "0dd50754bbb5709a",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.0.103",
+        "port": "1883",
+        "clientid": "Server_Node",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6be37b9c7940b181",
+        "type": "ui_group",
+        "name": "Gestão de Salas",
+        "tab": "a0c5613001cc07ac",
+        "order": 2,
+        "disp": true,
+        "width": 11,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d631b1de96be08a6",
+        "type": "ui_group",
+        "name": "Formulario",
+        "tab": "a0c5613001cc07ac",
+        "order": 3,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7413bc0a58eefed3",
+        "type": "ui_group",
+        "name": "Alterar Premissão do Utilizador",
+        "tab": "d853d28d5dcfb79f",
+        "order": 2,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "66599c4a7f0d48bb",
+        "type": "sqlitedb",
+        "db": "/home/gatekeeper/Desktop/Server/Current_Version/SQLite/IP.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "ad3cccc68a51eddb",
+        "type": "sqlitedb",
+        "db": "/home/gatekeeper/Desktop/Server/Current_Version/SQLite/ID.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "bf733cdbdd674558",
+        "type": "ui_group",
+        "name": "Lista de Utilizadores",
+        "tab": "d853d28d5dcfb79f",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1a2b57f3d6fad734",
+        "type": "ui_group",
+        "name": "Info Select",
+        "tab": "f8dbb9ca95ec2050",
+        "order": 1,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "dd8f300aa5cc04d1",
+        "type": "sqlitedb",
+        "db": "/home/gatekeeper/Desktop/Server/Current_Version/SQLite/Data.db",
+        "mode": "RO"
+    },
+    {
+        "id": "e1969f0e3ec10f3a",
+        "type": "ui_group",
+        "name": "InfoPresent2",
+        "tab": "f8dbb9ca95ec2050",
+        "order": 3,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f365520f587b4129",
+        "type": "ui_group",
+        "name": "Info Present",
+        "tab": "f8dbb9ca95ec2050",
+        "order": 2,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "293a8c16b9cb5d28",
+        "type": "ui_group",
+        "name": "SELECT",
+        "tab": "8b2ec6dbacc880d8",
+        "order": 1,
+        "disp": false,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d4411bb0b7663236",
+        "type": "sqlitedb",
+        "db": "/home/gatekeeper/Desktop/Server/Current_Version/SQLite/Log.db",
+        "mode": "RO"
+    },
+    {
+        "id": "5c07defa63ebae61",
+        "type": "ui_group",
+        "name": "Registos",
+        "tab": "8b2ec6dbacc880d8",
+        "order": 2,
+        "disp": false,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6d9783fe6db4ce8f",
+        "type": "ui_group",
+        "name": "Definições",
+        "tab": "e93c3787f3b98975",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a0c5613001cc07ac",
+        "type": "ui_tab",
+        "name": "Gestão Salas",
+        "icon": "lock_outline",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d853d28d5dcfb79f",
+        "type": "ui_tab",
+        "name": "Gestão Utilizador",
+        "icon": "person_outline",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f8dbb9ca95ec2050",
+        "type": "ui_tab",
+        "name": "Informação",
+        "icon": "information",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8b2ec6dbacc880d8",
+        "type": "ui_tab",
+        "name": "Historico de Acessos",
+        "icon": "history",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e93c3787f3b98975",
+        "type": "ui_tab",
+        "name": "Definições",
+        "icon": "settings",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    }
+]
